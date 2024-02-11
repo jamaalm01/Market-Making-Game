@@ -1,7 +1,7 @@
 #Instructions:
 #10 cards with numbers 1-100 will be drawn
 #Each round one card will be revealed and you need to make a market on the sum of the 10 cards 
-#You are competing against other market makers for an external traders to accept your bids/asks
+#You are competing against other market makers for an external trader to accept your bids/asks
 
 import random
 
