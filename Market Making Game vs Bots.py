@@ -21,7 +21,7 @@ def startGame():
         #Revealing One Card
         print("[",cards[0],"] [] [] [] [] [] [] [] [] []")
         
-        #generating opponent scores
+        #generating opponent spreads
         bids = []
         asks = []
         opp_bid_asks = []
