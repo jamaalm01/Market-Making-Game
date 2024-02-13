@@ -2,10 +2,12 @@
 #10 cards with numbers 1-100 will be drawn
 #Each round one card will be revealed and you need to make a market on the sum of the 10 cards 
 #You are competing against other market makers for an external trader to accept your bids/asks
+#Pass 1 or 2 into the startGame function to set the intelligence of the opponnents
+#Passing 1 means opponents will quote random spreads, passing 2 means they will try to play optimally
 
 import random
 
-def startGame():
+def startGame(opponent_intelligence):
     profit = 0
     for i in range(10):
         
@@ -25,12 +27,19 @@ def startGame():
         bids = []
         asks = []
         opp_bid_asks = []
-        for i in range(4):
-            opp_ask = round(random.randint(1,1000),-1)
-            opp_bid = round(opp_ask - random.randint(1,opp_ask),-1)
-            while (opp_ask == opp_bid):
+        for i in range(6):
+            #spreads for unintelligent opponents
+            if opponent_intelligence == 1:
                 opp_ask = round(random.randint(1,1000),-1)
                 opp_bid = round(opp_ask - random.randint(1,opp_ask),-1)
+                while (opp_ask == opp_bid):
+                    opp_ask = round(random.randint(1,1000),-1)
+                    opp_bid = round(opp_ask - random.randint(1,opp_ask),-1)
+            #spreads for more aware opponents
+            elif opponent_intelligence == 2:
+                opp_guess = int(454.5 + cards[0] + random.randint(-50,50))
+                opp_bid = round(opp_guess - random.randint(1,opp_guess),-1)
+                opp_ask = min(1000,round(opp_guess + (opp_guess - opp_bid),-1))
     
             opp_bid_asks.append((opp_bid,opp_ask))
             bids.append(opp_bid)
