@@ -3,7 +3,7 @@
 10 cards are chosen from numbers 1-100. Each round one cards is revealed. Your aim is to make a market on the sum of the 10 cards. 
 <br> Watch out as you are competing against other market makers for an external trader to take your bids/asks.
 <br> To run the game simply clone the repo and run the startGame() function and pass in 1 or 2 to set the intelligence of the bots/opponents
-<br> Passing 1 into the function will mean opponents will quote random spreads but passing 2 into the function means opponents will try to play more optimally
+<br> Passing 1 into the function will cause opponents to quote random spreads but passing 2 into the function will cause opponents to try to play more optimally
 <br> The lead trader will profit more with setting 1 and profit alot less with setting 2 
 
 
