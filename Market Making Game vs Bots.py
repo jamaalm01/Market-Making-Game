@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[3]:
+
+
 #Instructions:
 #10 cards with numbers 1-100 will be drawn
 #Each round one card will be revealed and you need to make a market on the sum of the 10 cards 
@@ -27,12 +33,11 @@ def startGame(n):
         underlying = sum(cards)
         
         #Revealing One Card
-        print("[",cards[0],"] [] [] [] [] [] [] [] [] []")
+        print("Revealing One Card: [",cards[0],"]")
         
         #generating opponent spreads
         bids = []
         asks = []
-        opp_bid_asks = []
         
         #prompting user to enter bid ask spread
         print("Enter your bid ask spread (eg:5,10)")
@@ -60,7 +65,6 @@ def startGame(n):
             oppMap[j][0] = opp_bid
             oppMap[j][1] = opp_ask
 
-            opp_bid_asks.append((opp_bid,opp_ask))
             bids.append(opp_bid)
             asks.append(opp_ask)
     
@@ -95,10 +99,13 @@ def startGame(n):
             traderPnL += highest_bid - underlying
         
         #Printing scores and feedback
-        print("\n")
-        print("Underlying: ", underlying)
-        print("Opponent Spreads: ", opp_bid_asks)
         
+        print("\n")
+        print("Revealing All Cards: ")
+        print("[",cards[0],"] [",cards[1],"] [",cards[2],"] [",cards[3],"] [",cards[4],"] [",cards[5],"] [",cards[6],"] [",cards[7],"] [",cards[8],"] [",cards[9],"]")
+        print("Underlying: ", underlying)
+        print("\n")
+
         if ask_taken:
             print("Lead trader has taken your ask of", ask)
         else:
@@ -112,15 +119,14 @@ def startGame(n):
         #print("Current Trader PnL:", traderPnL)
         print("\n")
         
-        print("Players         |  Profit")
-        print("-------------------------")
-        print("You             | ",profit)
+        print("Players         |  Total Profit and Current Market")
+        print("--------------------------------------------------")
+        print("You             | ",profit, "(",bid,"@",ask,")")
         for j in range(n):
-            print("Market Maker ",j+1,"| ", oppMap[j][2])
+            print("Market Maker ",j+1,"| ", oppMap[j][2], " (",oppMap[j][0],"@",oppMap[j][1],")")
         
         print("\n")
     
     print("Total Profit: ", profit)
     print("Trader PnL: ", traderPnL)
 
-startGame(5)
