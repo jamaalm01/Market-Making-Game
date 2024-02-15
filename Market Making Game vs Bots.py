@@ -50,10 +50,15 @@ def startGame(opponent_intelligence):
             
         #prompting user to enter bid ask spread
         print("Enter your bid ask spread (eg:5,10)")
-        bid_ask = input()
-        bid_ask = bid_ask.split(",")
-        bid = int(bid_ask[0])
-        ask = int(bid_ask[1])
+        while True:
+            try:
+                bid_ask = input()
+                bid_ask = bid_ask.split(",")
+                bid = int(bid_ask[0])
+                ask = int(bid_ask[1])
+                break
+            except:
+                print("Invalid Input - Enter your spread in the form : bid,ask")
         
         round_profit = 0
         ask_taken = False
