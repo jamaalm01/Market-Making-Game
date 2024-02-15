@@ -95,10 +95,10 @@ def startGame(n):
             traderPnL += highest_bid - underlying
         
         #Printing scores and feedback
-        
+        print("\n")
         print("Underlying: ", underlying)
         print("Opponent Spreads: ", opp_bid_asks)
-        print("\n")
+        
         if ask_taken:
             print("Lead trader has taken your ask of", ask)
         else:
@@ -108,8 +108,8 @@ def startGame(n):
         else:
             print("Lead trader has taken an opponents bid of", highest_bid)
         
-        print("Round Profit: ", round_profit)
-        print("Current Trader PnL:", traderPnL)
+        #print("Round Profit: ", round_profit)
+        #print("Current Trader PnL:", traderPnL)
         print("\n")
         
         print("Players         |  Profit")
