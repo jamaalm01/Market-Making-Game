@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 #Instructions:
 #10 cards with numbers 1-100 will be drawn
 #Each round one card will be revealed and you need to make a market on the sum of the 10 cards 
@@ -129,15 +123,4 @@ def startGame(n):
     print("Total Profit: ", profit)
     print("Trader PnL: ", traderPnL)
 
-
-# In[2]:
-
-
 startGame(5)
-
-
-# In[ ]:
-
-
-
-
