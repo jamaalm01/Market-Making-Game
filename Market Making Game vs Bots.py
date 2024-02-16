@@ -13,6 +13,9 @@
 import random
 
 def startGame(n):
+    print("There are 10 cards in total. We will reveal one card each round. Your goal is to quote a bid/ask spread")
+    print("on the sum of the 10 cards")
+    print(" ")
     traderPnL = 0
     profit = 0
     
