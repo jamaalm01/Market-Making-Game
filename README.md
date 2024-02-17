@@ -1,4 +1,4 @@
-# Market Making Game vs Bots
+# Market Making Simulation
 ## How to Play:
 10 cards are chosen from numbers 1-100. Each round one cards is revealed. Your aim is to make a market on the sum of the 10 cards. 
 <br> Watch out as you are competing against other market makers for an external trader to take your bids/asks.
