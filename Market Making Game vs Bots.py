@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[5]:
 
 
 #Instructions:
@@ -22,7 +22,7 @@ def startGame(n):
     #HashMap to store all opponents bids,asks and profit
     oppMap = {}
     for i in range(n):
-        oppMap[i] = [0,0,0] #[bid,ask,profit]
+        oppMap[i] = [0,0,0,0,0] #[bid,ask,profit,bid_vol,ask_vol]
     
     for i in range(10):
         
@@ -53,11 +53,22 @@ def startGame(n):
                 break
             except:
                 print("Invalid Input - Enter your spread in the form : bid,ask")
+                
+        print("Enter your bid ask volume (eg:1,2)")
+        while True:
+            try:
+                bid_ask_vol = input()
+                bid_ask_vol = bid_ask_vol.split(",")
+                bid_vol = int(bid_ask_vol[0])
+                ask_vol = int(bid_ask_vol[1])
+                break
+            except:
+                print("Invalid Input - Enter your volume in the form : bid volume,ask volume")
         
         asks.append(ask)
         bids.append(bid)
         
-        #Generating opponent bids and asks
+        #Generating opponent bids and asks and volume
         for j in range(n):
             opp_guess = int(454.5 + cards[0] + random.randint(-50,50))
             opp_bid = round(opp_guess - random.randint(1,opp_guess),-1)
@@ -65,8 +76,14 @@ def startGame(n):
             while (opp_ask == opp_bid):
                 opp_bid = round(opp_guess - random.randint(1,opp_guess),-1)
                 opp_ask = min(1000,round(opp_guess + (opp_guess - opp_bid),-1))
+                
+            opp_bid_vol = random.randint(1,10) 
+            opp_ask_vol = random.randint(1,10)
+            
             oppMap[j][0] = opp_bid
             oppMap[j][1] = opp_ask
+            oppMap[j][3] = opp_bid_vol
+            oppMap[j][4] = opp_ask_vol
 
             bids.append(opp_bid)
             asks.append(opp_ask)
@@ -77,29 +94,26 @@ def startGame(n):
         #Determining profit for opponents after round
         for k in range(n):
             if oppMap[k][0] == highest_bid:
-                oppMap[k][2] += underlying - highest_bid
-                traderPnL += highest_bid - underlying
+                oppMap[k][2] += (underlying - highest_bid)*oppMap[k][3]
+                traderPnL += (highest_bid - underlying)*oppMap[k][3]
             if oppMap[k][1] == lowest_ask:
-                oppMap[k][2] += lowest_ask - underlying
-                traderPnL += underlying - lowest_ask
+                oppMap[k][2] += (lowest_ask - underlying)*oppMap[k][4]
+                traderPnL += (underlying - lowest_ask)*oppMap[k][4]
         
         #Determining profit for player after round
         
-        round_profit = 0
         ask_taken = False
         bid_taken = False
         
         if ask == lowest_ask:
             ask_taken = True
-            round_profit += (ask - underlying)
-            profit += (ask - underlying)
-            traderPnL += underlying - lowest_ask
+            profit += (ask - underlying)*ask_vol
+            traderPnL += (underlying - lowest_ask)*ask_vol
         
         if bid == highest_bid:
             bid_taken = True
-            round_profit += (underlying - bid)
-            profit += (underlying - bid)
-            traderPnL += highest_bid - underlying
+            profit += (underlying - bid)*bid_vol
+            traderPnL += (highest_bid - underlying)*bid_vol
         
         #Printing scores and feedback
         
@@ -118,18 +132,15 @@ def startGame(n):
         else:
             print("Lead trader has taken an opponents bid of", highest_bid)
         
-        #print("Round Profit: ", round_profit)
-        #print("Current Trader PnL:", traderPnL)
         print("\n")
         
         print("Players         |  Total Profit and Current Market")
         print("--------------------------------------------------")
-        print("You             | ",profit, "(",bid,"@",ask,")")
+        print("You             | ",profit, "(",bid,"@",ask,") ",bid_vol,"by",ask_vol)
         for j in range(n):
-            print("Market Maker ",j+1,"| ", oppMap[j][2], " (",oppMap[j][0],"@",oppMap[j][1],")")
+            print("Market Maker ",j+1,"| ", oppMap[j][2], " (",oppMap[j][0],"@",oppMap[j][1],") ", oppMap[j][3],"by",oppMap[j][4])
         
         print("\n")
     
-    print("Total Profit: ", profit)
     print("Trader PnL: ", traderPnL)
 
